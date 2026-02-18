@@ -146,7 +146,7 @@
         .logo-img {
             max-height: 25vh; /* Batasi tinggi logo */
             width: auto;
-            max-width: 80%;
+            max-width: 60%;
             margin-bottom: 15px;
             filter: drop-shadow(0 8px 15px rgba(0,0,0,0.2));
             animation: float 4s ease-in-out infinite;
@@ -175,8 +175,16 @@
 
         @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
 
-        /* PETA */
-        .map-container { width: 100%; height: 100%; background: url('https://iili.io/q2zQZjn.png') no-repeat center center; background-size: cover; position: relative; }
+        /* PETA - PERBAIKAN FIT */
+        .map-container { 
+            width: 100%; 
+            height: 100%; 
+            background: url('https://iili.io/q2zQZjn.png') no-repeat center center; 
+            /* Mengubah cover menjadi 100% 100% agar pas satu layar tidak terpotong */
+            background-size: 100% 100%; 
+            position: relative; 
+        }
+        
         .mission-pin {
             position: absolute; width: 55px; height: 55px;
             background: white; border-radius: 50%; border: 3px solid #ccc;
@@ -384,13 +392,13 @@
                 { name: "Petani", role: "Menanam padi dan menghasilkan pangan", type: "Barang", roleOpts: ["Mengantar paket", "Menanam padi dan menghasilkan pangan", "Mengatur lalu lintas"] },
                 { name: "Nelayan", role: "Menangkap ikan di laut", type: "Barang", roleOpts: ["Menangkap ikan di laut", "Mendidik siswa", "Menjual obat"] },
                 { name: "Peternak", role: "Memelihara hewan ternak sapi/ayam", type: "Barang", roleOpts: ["Memelihara hewan ternak sapi/ayam", "Mengobati sakit", "Membangun rumah"] },
-                { name: "Tukang Cukur", role: "Memotong dan merapikan rambut", type: "Jasa", roleOpts: ["Memotong dan merapikan rambut", "Memanen sayur", "Membuat baju"] },
-                { name: "Guru", role: "Mendidik murid di sekolah", type: "Jasa", roleOpts: ["Mendidik murid di sekolah", "Menjual buku", "Membuat mobil"] },
-                { name: "Dokter", role: "Memeriksa dan mengobati orang sakit", type: "Jasa", roleOpts: ["Memeriksa dan mengobati orang sakit", "Memasak makanan", "Menangkap pencuri"] },
-                { name: "Polisi", role: "Menjaga keamanan masyarakat", type: "Jasa", roleOpts: ["Menjaga keamanan masyarakat", "Membangun rumah", "Memotong rambut"] },
-                { name: "Arsitek", role: "Merancang desain bangunan", type: "Jasa", roleOpts: ["Merancang desain bangunan", "Menanam pohon", "Menjual tiket"] },
-                { name: "Koki", role: "Memasak makanan lezat di restoran", type: "Barang", roleOpts: ["Memasak makanan lezat di restoran", "Mendidik anak", "Memperbaiki mesin"] },
-                { name: "Penjahit", role: "Menjahit kain menjadi pakaian", type: "Barang", roleOpts: ["Menjahit kain menjadi pakaian", "Membeli kain", "Membuang sampah"] }
+                { name: "Tukang Cukur", role: "Memotong dan merapikan rambut", type: "Jasa", roleOpts: ["Memotong rambut", "Memanen sayur", "Membuat baju"] },
+                { name: "Guru", role: "Mendidik murid di sekolah", type: "Jasa", roleOpts: ["Mendidik murid", "Menjual buku", "Membuat mobil"] },
+                { name: "Dokter", role: "Memeriksa dan mengobati orang sakit", type: "Jasa", roleOpts: ["Memeriksa orang sakit", "Memasak makanan", "Menangkap pencuri"] },
+                { name: "Polisi", role: "Menjaga keamanan masyarakat", type: "Jasa", roleOpts: ["Menjaga keamanan", "Membangun rumah", "Memotong rambut"] },
+                { name: "Arsitek", role: "Merancang desain bangunan", type: "Jasa", roleOpts: ["Merancang bangunan", "Menanam pohon", "Menjual tiket"] },
+                { name: "Koki", role: "Memasak makanan lezat di restoran", type: "Barang", roleOpts: ["Memasak makanan", "Mendidik anak", "Memperbaiki mesin"] },
+                { name: "Penjahit", role: "Menjahit kain menjadi pakaian", type: "Barang", roleOpts: ["Menjahit pakaian", "Membeli kain", "Membuang sampah"] }
             ],
             reflection: "Pekerjaan apa yang menurutmu paling berjasa di lingkungan rumahmu? Mengapa?"
         },
@@ -483,9 +491,10 @@
             <div class="home-layout">
                 <img src="${logoUrl}" class="logo-img">
                 <div class="intro-box">
-                    <p style="font-size:1.1rem; margin-bottom:8px; color:var(--accent);">Halo Petualang Cilik! 🌏✨</p>
-                    <p style="font-size:0.95rem; line-height:1.4;">Selamat datang di <strong>Ekspedisi Ekonomi Nusantara</strong>!</p>
-                    <p style="font-size:0.9rem; margin-top:8px; line-height:1.3;">Siapkan dirimu menjelajahi kepulauan Indonesia. Misi rahasia menantimu: mengungkap bagaimana masyarakat bekerja keras memenuhi kebutuhan hidup sehari-hari.</p>
+                    <h2 style="color:var(--accent); font-family:'Fredoka One'; margin:0 0 10px 0; font-size:1.5rem;">Halo Petualang Cilik! 🌏✨</h2>
+                    <p style="margin:5px 0;">Selamat datang di <strong>Ekspedisi Ekonomi Nusantara</strong>!</p>
+                    <p style="margin:5px 0;">Siapkan dirimu menjelajahi kepulauan Indonesia. Misi rahasia menantimu: mengungkap bagaimana masyarakat bekerja keras memenuhi kebutuhan hidup sehari-hari.</p>
+                    <p style="margin:10px 0 0 0; color:var(--secondary); font-weight:bold;">Siap jadi Pahlawan Ekonomi? Ayo mulai!</p>
                 </div>
                 <button class="btn" onclick="showNameInput()">MULAI PETUALANGAN</button>
             </div>
@@ -679,18 +688,15 @@
         const modal = document.getElementById('modal'), content = document.getElementById('modal-content');
         if(type==='badge_award'){ const bi = state.currentLevel-1; content.innerHTML = `<img src="${badgeImages[bi]}" class="badge-award-img"><h2 style="font-family:'Fredoka One'; color:var(--secondary); margin:0;">MISI SELESAI!</h2><p>Lencana berhasil didapatkan!</p><button class="btn btn-green" id="m-ok">Lanjut</button>`; }
         else { content.innerHTML = `<div style="font-size:3rem;">${type==='success'?'🌟':'⚠️'}</div><h2 style="font-family:'Fredoka One'; margin:5px 0;">${t}</h2><p style="font-size:1.1rem; line-height:1.4;">${m}</p>${type==='reflection'?'<textarea id="ref-val" class="reflection-textarea" placeholder="Tulis refleksimu di sini..."></textarea>':''}<button class="btn" id="m-ok">OK</button>`; }
-        modal.style.display = 'flex'; 
-        
-        // Hapus listener lama jika ada (untuk keamanan)
-        const oldBtn = document.getElementById('m-ok');
-        const newBtn = oldBtn.cloneNode(true);
-        oldBtn.parentNode.replaceChild(newBtn, oldBtn);
-        
-        newBtn.onclick = () => {
+        modal.style.display = 'flex'; document.getElementById('m-ok').onclick = () => {
+            // Save reflection if present
             const refInput = document.getElementById('ref-val');
-            const val = refInput ? refInput.value : null;
+            if(refInput && cb) {
+                cb(refInput.value); // Pass value to callback
+            } else if(cb) {
+                cb();
+            }
             modal.style.display='none'; 
-            if(cb) setTimeout(() => cb(val), 100); // Delay kecil agar transisi modal mulus
         };
     }
     function closeModal(){ document.getElementById('modal').style.display='none'; }
@@ -719,7 +725,7 @@
                     <img src="${logoUrl}" style="width:130px; margin-bottom:10px;">
                     <h1 style="font-family:'Fredoka One'; color:var(--accent); margin:0; font-size:1.8rem;">SERTIFIKAT KEAHLIAN</h1>
                     <p style="margin:5px 0;">Diberikan Kepada Petualang Hebat:</p>
-                    <h2 style="color:var(--text-dark); border-bottom:3px solid var(--primary); display:inline-block; padding:0 30px; margin:10px 0;">${state.playerName}</h2>
+                    <h2 style="color:var(--text-dark); border-bottom:3px solid var(--primary); display:inline-block; padding:0 20px; margin:10px 0;">${state.playerName}</h2>
                     <p style="font-weight:bold; color:#666; margin:0;">${state.playerSchool}</p>
                     <div class="cert-score">
                         <p style="font-size:1.1rem; margin:5px 0;">Jawaban Benar: <span style="color:var(--secondary); font-weight:bold;">${state.totalCorrect}</span></p>
