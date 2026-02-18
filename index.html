@@ -175,16 +175,8 @@
 
         @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
 
-        /* PETA - PERBAIKAN FIT */
-        .map-container { 
-            width: 100%; 
-            height: 100%; 
-            background: url('https://iili.io/q2zQZjn.png') no-repeat center center; 
-            /* Mengubah cover menjadi 100% 100% agar pas satu layar tidak terpotong */
-            background-size: 100% 100%; 
-            position: relative; 
-        }
-        
+        /* PETA */
+        .map-container { width: 100%; height: 100%; background: url('https://iili.io/q2zQZjn.png') no-repeat center center; background-size: cover; position: relative; }
         .mission-pin {
             position: absolute; width: 55px; height: 55px;
             background: white; border-radius: 50%; border: 3px solid #ccc;
@@ -392,13 +384,13 @@
                 { name: "Petani", role: "Menanam padi dan menghasilkan pangan", type: "Barang", roleOpts: ["Mengantar paket", "Menanam padi dan menghasilkan pangan", "Mengatur lalu lintas"] },
                 { name: "Nelayan", role: "Menangkap ikan di laut", type: "Barang", roleOpts: ["Menangkap ikan di laut", "Mendidik siswa", "Menjual obat"] },
                 { name: "Peternak", role: "Memelihara hewan ternak sapi/ayam", type: "Barang", roleOpts: ["Memelihara hewan ternak sapi/ayam", "Mengobati sakit", "Membangun rumah"] },
-                { name: "Tukang Cukur", role: "Memotong dan merapikan rambut", type: "Jasa", roleOpts: ["Memotong rambut", "Memanen sayur", "Membuat baju"] },
-                { name: "Guru", role: "Mendidik murid di sekolah", type: "Jasa", roleOpts: ["Mendidik murid", "Menjual buku", "Membuat mobil"] },
-                { name: "Dokter", role: "Memeriksa dan mengobati orang sakit", type: "Jasa", roleOpts: ["Memeriksa orang sakit", "Memasak makanan", "Menangkap pencuri"] },
-                { name: "Polisi", role: "Menjaga keamanan masyarakat", type: "Jasa", roleOpts: ["Menjaga keamanan", "Membangun rumah", "Memotong rambut"] },
-                { name: "Arsitek", role: "Merancang desain bangunan", type: "Jasa", roleOpts: ["Merancang bangunan", "Menanam pohon", "Menjual tiket"] },
-                { name: "Koki", role: "Memasak makanan lezat di restoran", type: "Barang", roleOpts: ["Memasak makanan", "Mendidik anak", "Memperbaiki mesin"] },
-                { name: "Penjahit", role: "Menjahit kain menjadi pakaian", type: "Barang", roleOpts: ["Menjahit pakaian", "Membeli kain", "Membuang sampah"] }
+                { name: "Tukang Cukur", role: "Memotong dan merapikan rambut", type: "Jasa", roleOpts: ["Memotong dan merapikan rambut", "Memanen sayur", "Membuat baju"] },
+                { name: "Guru", role: "Mendidik murid di sekolah", type: "Jasa", roleOpts: ["Mendidik murid di sekolah", "Menjual buku", "Membuat mobil"] },
+                { name: "Dokter", role: "Memeriksa dan mengobati orang sakit", type: "Jasa", roleOpts: ["Memeriksa dan mengobati orang sakit", "Memasak makanan", "Menangkap pencuri"] },
+                { name: "Polisi", role: "Menjaga keamanan masyarakat", type: "Jasa", roleOpts: ["Menjaga keamanan masyarakat", "Membangun rumah", "Memotong rambut"] },
+                { name: "Arsitek", role: "Merancang desain bangunan", type: "Jasa", roleOpts: ["Merancang desain bangunan", "Menanam pohon", "Menjual tiket"] },
+                { name: "Koki", role: "Memasak makanan lezat di restoran", type: "Barang", roleOpts: ["Memasak makanan lezat di restoran", "Mendidik anak", "Memperbaiki mesin"] },
+                { name: "Penjahit", role: "Menjahit kain menjadi pakaian", type: "Barang", roleOpts: ["Menjahit kain menjadi pakaian", "Membeli kain", "Membuang sampah"] }
             ],
             reflection: "Pekerjaan apa yang menurutmu paling berjasa di lingkungan rumahmu? Mengapa?"
         },
@@ -576,7 +568,7 @@
             </div>
             <div class="spacer-bottom"></div>`;
         initDrag(document.getElementById('card-m1'), document.querySelectorAll('.target-m1'), (d,t) => {
-            if(d.dataset.type === t.dataset.target){ playSFX('correct'); state.totalCorrect++; state.totalScore+=10; showModal("Benar!","Bagus sekali! +10 Poin","success",()=>{state.subStep++; renderM1();}); }
+            if(d.dataset.type === t.dataset.target){ playSFX('correct'); state.totalCorrect++; state.totalScore+=2; showModal("Benar!","Bagus sekali! +2 Poin","success",()=>{state.subStep++; renderM1();}); }
             else { playSFX('wrong'); showModal("Salah",`Seharusnya: <strong>${d.dataset.type}</strong>`,"error",()=>{state.subStep++; renderM1();}); }
             updateScore();
         });
@@ -590,8 +582,8 @@
     }
     function checkM2(ans) {
         const cur = gameData.misi2.data[state.subStep];
-        if(state.m2_step===0){ if(ans===cur.role){ playSFX('correct'); state.totalCorrect++; state.totalScore+=10; state.m2_step=1; renderM2(); } else { playSFX('wrong'); showModal("Kurang Tepat","Perannya adalah: " + cur.role,"error",()=>{state.m2_step=1; renderM2();}); } }
-        else { if(ans===cur.type){ playSFX('correct'); state.totalCorrect++; state.totalScore+=10; showModal("Benar!","Hebat! +10 Poin","success",()=>{state.m2_step=0; state.subStep++; renderM2();}); } else { playSFX('wrong'); showModal("Kurang Tepat",`Hasilnya adalah: ${cur.type}`,"error",()=>{state.m2_step=0; state.subStep++; renderM2();}); } }
+        if(state.m2_step===0){ if(ans===cur.role){ playSFX('correct'); state.totalCorrect++; state.totalScore+=1; state.m2_step=1; renderM2(); } else { playSFX('wrong'); showModal("Kurang Tepat","Perannya adalah: " + cur.role,"error",()=>{state.m2_step=1; renderM2();}); } }
+        else { if(ans===cur.type){ playSFX('correct'); state.totalCorrect++; state.totalScore+=1; showModal("Benar!","Hebat! +1 Poin","success",()=>{state.m2_step=0; state.subStep++; renderM2();}); } else { playSFX('wrong'); showModal("Kurang Tepat",`Hasilnya adalah: ${cur.type}`,"error",()=>{state.m2_step=0; state.subStep++; renderM2();}); } }
         updateScore();
     }
 
@@ -599,7 +591,7 @@
         const q = gameData.misi3.questions[state.subStep]; if(!q){ levelComplete(); return; }
         document.getElementById('play-wrapper').innerHTML = `<div class="game-instruction">Kasus ${state.subStep+1}/4: Ramah lingkungan?</div><div class="card-item" style="max-width:600px">"${q.text}"</div><div style="display:flex;gap:20px"><button class="btn btn-green" style="width:160px;" onclick="checkM3(true)">YA ✅</button><button class="btn" style="background:#D32F2F; width:160px;" onclick="checkM3(false)">TIDAK ❌</button></div>`;
     }
-    function checkM3(a){ const q = gameData.misi3.questions[state.subStep]; if(a===q.isEco){ playSFX('correct'); state.totalCorrect++; state.totalScore+=10; showModal("Benar!",q.reason,"success",()=>{state.subStep++; renderM3();}); } else { playSFX('wrong'); showModal("Salah",q.reason,"error",()=>{state.subStep++; renderM3();}); } updateScore(); }
+    function checkM3(a){ const q = gameData.misi3.questions[state.subStep]; if(a===q.isEco){ playSFX('correct'); state.totalCorrect++; state.totalScore+=5; showModal("Benar!",q.reason + " +5 Poin","success",()=>{state.subStep++; renderM3();}); } else { playSFX('wrong'); showModal("Salah",q.reason,"error",()=>{state.subStep++; renderM3();}); } updateScore(); }
     
     function renderM4A1() {
         const d = gameData.misi4.observations; if(state.subStep>=d.length){ state.subStep=0; renderM4A2(); return; }
@@ -610,7 +602,7 @@
     function checkM4A1() {
         const cur = gameData.misi4.observations[state.subStep]; let c = 0;
         cur.questions.forEach((q,i)=>{ if(parseInt(document.getElementById(`obs-${i}`).value)===q.ans) c++; });
-        if(c===cur.questions.length){ playSFX('correct'); state.totalCorrect++; state.totalScore+=10; showModal("Akurat!","Laporan diterima. +10 Poin","success",()=>{state.subStep++; renderM4A1();}); }
+        if(c===cur.questions.length){ playSFX('correct'); state.totalCorrect++; state.totalScore+=1; showModal("Akurat!","Laporan diterima. +1 Poin","success",()=>{state.subStep++; renderM4A1();}); }
         else { playSFX('wrong'); showModal("Kurang Akurat","Poin 0 untuk laporan ini.","error",()=>{state.subStep++; renderM4A1();}); }
         updateScore();
     }
@@ -619,14 +611,14 @@
         let opts = q.options.map((o,i)=>`<button class="option-btn" onclick="checkM4A2(${i})">${o}</button>`).join('');
         document.getElementById('play-wrapper').innerHTML = `<div class="game-instruction">Aktivitas 2: Kuis Detektif (${state.subStep+1}/5)</div><div class="card-item">${q.q}</div><div class="option-grid">${opts}</div><div class="spacer-bottom"></div>`;
     }
-    function checkM4A2(i){ if(i===gameData.misi4.quizQuestions[state.subStep].ans){ playSFX('correct'); state.totalCorrect++; state.totalScore+=10; showModal("Benar!","Hebat! +10 Poin","success",()=>{state.subStep++; renderM4A2();}); } else { playSFX('wrong'); showModal("Salah","Sayang sekali, poin 0.","error",()=>{state.subStep++; renderM4A2();}); } updateScore(); }
+    function checkM4A2(i){ if(i===gameData.misi4.quizQuestions[state.subStep].ans){ playSFX('correct'); state.totalCorrect++; state.totalScore+=2; showModal("Benar!","Hebat! +2 Poin","success",()=>{state.subStep++; renderM4A2();}); } else { playSFX('wrong'); showModal("Salah","Sayang sekali, poin 0.","error",()=>{state.subStep++; renderM4A2();}); } updateScore(); }
 
     function renderM5A1() {
         const p = gameData.misi5.pairs; let s = [...p].sort(()=>Math.random()-0.5);
         document.getElementById('play-wrapper').innerHTML = `<div class="game-instruction">Aktivitas 1: Tarik Masalah ke Penyebab!</div><div class="dnd-container"><div class="dnd-col">${s.map(i=>`<div class="pair-draggable" data-id="${i.id}">${i.source}</div>`).join('')}</div><div class="dnd-col">${p.map(i=>`<div class="drop-zone" data-target="${i.id}">${i.target}</div>`).join('')}</div></div><div class="spacer-bottom"></div>`;
         const drags = document.querySelectorAll('.pair-draggable'), zones = document.querySelectorAll('.drop-zone');
         drags.forEach(d => { initDrag(d, zones, (dragged, dropped) => {
-            if(dragged.dataset.id === dropped.dataset.target){ playSFX('correct'); state.totalCorrect++; state.totalScore+=10; state.matchesFound++; dropped.innerHTML=""; dropped.appendChild(dragged); dragged.style.position='static'; dropped.classList.add('filled'); if(state.matchesFound>=4){ state.subStep=0; setTimeout(renderM5A2,1000); } }
+            if(dragged.dataset.id === dropped.dataset.target){ playSFX('correct'); state.totalCorrect++; state.totalScore+=2.5; state.matchesFound++; dropped.innerHTML=""; dropped.appendChild(dragged); dragged.style.position='static'; dropped.classList.add('filled'); if(state.matchesFound>=4){ state.subStep=0; setTimeout(renderM5A2,1000); } }
             else { playSFX('wrong'); showModal("Salah","Penyebab kurang tepat.","error"); }
             updateScore();
         }); });
@@ -636,7 +628,7 @@
         let o = c.options.map((o,i)=>`<button class="option-btn" onclick="checkM5A2(${i})">${o}</button>`).join('');
         document.getElementById('play-wrapper').innerHTML = `<div class="game-instruction">Aktivitas 2: Kasus (${state.subStep+1}/4)</div><div class="intro-box"><h3>${c.text}</h3></div><div class="option-grid">${o}</div><div class="spacer-bottom"></div>`;
     }
-    function checkM5A2(i){ if(i===gameData.misi5.cases[state.subStep].correct){ playSFX('correct'); state.totalCorrect++; state.totalScore+=10; showModal("Benar!","Solusi cerdas. +10 Poin","success",()=>{state.subStep++; renderM5A2();}); } else { playSFX('wrong'); showModal("Kurang Tepat","Sayang sekali, poin 0.","error",()=>{state.subStep++; renderM5A2();}); } updateScore(); }
+    function checkM5A2(i){ if(i===gameData.misi5.cases[state.subStep].correct){ playSFX('correct'); state.totalCorrect++; state.totalScore+=2.5; showModal("Benar!","Solusi cerdas. +2.5 Poin","success",()=>{state.subStep++; renderM5A2();}); } else { playSFX('wrong'); showModal("Kurang Tepat","Sayang sekali, poin 0.","error",()=>{state.subStep++; renderM5A2();}); } updateScore(); }
 
     // --- UTILS & DATA SENDING ---
     
